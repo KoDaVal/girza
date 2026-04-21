@@ -19,8 +19,8 @@ export default function Contacto() {
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                   {[
-                    { icon: icons.mail,   label: "Correo",    value: "Cruzcruz.luise@gmail.com" },
-                    { icon: icons.phone,  label: "WhatsApp",  value: "222 543 0566" },
+                    { icon: icons.mail,   label: "Correo",    value: "contacto@girsapuebla.org" },
+                    { icon: icons.phone,  label: "WhatsApp",  value: "222-850-8632" },
                     { icon: icons.mapPin, label: "Ubicación", value: "Puebla, México" },
                   ].map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -70,7 +70,7 @@ export default function Contacto() {
             <h3 style={{ ...s.h3, fontSize: "clamp(1.1rem, 3vw, 1.875rem)" }}>¿Prefieres escribirnos por WhatsApp?</h3>
             <p style={{ ...s.body, marginTop: 6 }}>Respuesta inmediata en horario de oficina.</p>
           </div>
-          <a href="https://wa.me/522225430566" target="_blank" rel="noopener noreferrer" className="btn-fx" style={{ ...s.btn, background: "#25D366", color: "#fff", textDecoration: "none", fontSize: 16, padding: "18px 36px" }}>
+          <a href="https://wa.me/522228508632" target="_blank" rel="noopener noreferrer" className="btn-fx" style={{ ...s.btn, background: "#25D366", color: "#fff", textDecoration: "none", fontSize: 16, padding: "18px 36px" }}>
             {icons.whatsapp} Abrir WhatsApp
           </a>
         </div>

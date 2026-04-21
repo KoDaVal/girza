@@ -981,7 +981,7 @@ function Transparencia() {
                 <div style={{ width: 56, height: 56, borderRadius: 14, background: COLORS.accent.bg, display: "flex", alignItems: "center", justifyContent: "center", color: COLORS.accent.main, marginBottom: 24 }}>
                   {icons.shield}
                 </div>
-                <h3 style={{ ...s.h3, marginBottom: 14 }}>Buzón de denuncias</h3>
+                <h3 style={{ ...s.h3, marginBottom: 14 }}>Buzón de sugerencias</h3>
                 <p style={{ ...s.body, marginBottom: 28 }}>Reporta cualquier irregularidad de forma anónima y segura. Tu identidad está protegida.</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   <input placeholder="Asunto" style={{ padding: "14px 18px", borderRadius: 10, border: `1px solid ${COLORS.neutral[100]}`, fontSize: 15, fontFamily: fonts.body, outline: "none", transition: "border-color 0.3s" }} />

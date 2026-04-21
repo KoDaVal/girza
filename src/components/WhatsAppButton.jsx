@@ -12,7 +12,7 @@ export function WhatsAppButton() {
           100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0); }
         }
       `}</style>
-      <a href="https://wa.me/522225430566" target="_blank" rel="noopener noreferrer"
+      <a href="https://wa.me/522228508632" target="_blank" rel="noopener noreferrer"
         style={{
           position: "fixed", bottom: 28, right: 28, zIndex: 999, width: 62, height: 62, borderRadius: "50%",
           background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center",
