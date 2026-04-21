@@ -2,7 +2,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -81,37 +81,113 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 
 input:focus, textarea:focus, select:focus { border-color: #5A9E7A !important; }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}
+/* ─── LAYOUT GRIDS (semánticos para responsive) ──────────────────────────── */
 
-/* ─── RESPONSIVE: Tablet ─────────────────────────────────────────────────── */
+/* Grid genérico de 2 columnas */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+/* Grid de 2 columnas con más gap (páginas de servicios/contacto) */
+.grid-2-wide { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+
+/* Grid de 3 columnas */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
+/* Grid de 4 columnas (stats, team) */
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+
+/* Grid galería 3 cols */
+.grid-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+/* Botones hero en fila */
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* Evento card */
+.evento-card { display: flex; align-items: center; gap: 36px; }
+.evento-separator { width: 1px; height: 52px; flex-shrink: 0; }
+
+/* Input doble en contacto */
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* Input/Select/Textarea ancho completo */
+.form-input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid #E8E8E4;
+  font-size: 15px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.3s;
+  background: #fff;
+  color: #1A1A1A;
+}
+.form-input:focus { border-color: #5A9E7A; }
+
+/* ─── NAVBAR ─────────────────────────────────────────────────────────────── */
+.hamburger-btn { display: none; }
+.nav-desktop-links { display: flex; gap: 4px; align-items: center; }
+
+/* ─── HERO ───────────────────────────────────────────────────────────────── */
+.hero-scroll-hint { display: flex; }
+
+/* ─── RESPONSIVE: Tablet ≤ 900px ────────────────────────────────────────── */
 @media (max-width: 900px) {
   .nav-desktop-links { display: none !important; }
   .hamburger-btn     { display: flex !important; }
+
+  .grid-2       { grid-template-columns: 1fr; gap: 24px; }
+  .grid-2-wide  { grid-template-columns: 1fr; gap: 32px; }
+  .grid-gallery { grid-template-columns: repeat(2, 1fr); }
+
+  /* En galería quitar el span de fila */
+  .grid-gallery > *:first-child { grid-row: auto !important; }
 }
 
-/* ─── RESPONSIVE: Mobile ─────────────────────────────────────────────────── */
+/* ─── RESPONSIVE: Mobile ≤ 600px ────────────────────────────────────────── */
 @media (max-width: 600px) {
-  /* Hero h1 */
-  h1 { font-size: 2.4rem !important; }
-  h2 { font-size: 1.8rem !important; }
-  h3 { font-size: 1.2rem !important; }
+  /* Tipografías */
+  h1 { font-size: 2.2rem !important; line-height: 1.15 !important; }
+  h2 { font-size: 1.7rem !important; }
+  h3 { font-size: 1.15rem !important; }
 
-  /* Secciones con padding vertical reducido */
-  section { padding-top: 64px !important; padding-bottom: 64px !important; }
+  /* Padding general de secciones */
+  section { padding-top: 60px !important; padding-bottom: 60px !important; }
 
-  /* Grids de 2+ columnas → 1 columna */
-  [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
-  [style*="grid-template-columns: 1fr 1fr"]  { grid-template-columns: 1fr !important; }
-  [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+  /* Padding top de páginas internas */
+  .page-inner { padding-top: 80px !important; }
 
-  /* Contenedor con padding lateral cómodo */
-  [style*="maxWidth: 1240"] { padding-left: 20px !important; padding-right: 20px !important; }
+  /* Container con padding lateral seguro */
+  .container { padding-left: 18px !important; padding-right: 18px !important; }
 
-  /* Botones full-width en hero */
-  [style*="display: \"flex\", gap: 16, flexWrap: \"wrap\""] { flex-direction: column !important; }
+  /* Grids → 1 columna */
+  .grid-2       { grid-template-columns: 1fr !important; gap: 20px; }
+  .grid-2-wide  { grid-template-columns: 1fr !important; gap: 24px; }
+  .grid-3       { grid-template-columns: 1fr !important; gap: 20px; }
+  .grid-4       { grid-template-columns: 1fr 1fr !important; gap: 16px; }
+  .grid-gallery { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .grid-gallery > *:first-child { grid-row: auto !important; }
 
-  /* Scroll indicator oculto en móvil */
-  [style*="position: \"absolute\", bottom: 40"] { display: none !important; }
+  /* Botones hero en columna */
+  .hero-btns { flex-direction: column; align-items: stretch; }
+  .hero-btns a, .hero-btns button { width: 100%; justify-content: center; }
+
+  /* Scroll hint oculto */
+  .hero-scroll-hint { display: none !important; }
+
+  /* Eventos card en móvil → columna */
+  .evento-card { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .evento-separator { display: none; }
+
+  /* Input row → 1 columna */
+  .input-row { grid-template-columns: 1fr; }
+
+  /* Cards con menos padding */
+  .card-padded { padding: 28px !important; }
+
+  /* WhatsApp CTA → columna */
+  .whatsapp-cta { flex-direction: column; align-items: flex-start !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
