@@ -84,3 +84,34 @@ input:focus, textarea:focus, select:focus { border-color: #5A9E7A !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ─── RESPONSIVE: Tablet ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-desktop-links { display: none !important; }
+  .hamburger-btn     { display: flex !important; }
+}
+
+/* ─── RESPONSIVE: Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  /* Hero h1 */
+  h1 { font-size: 2.4rem !important; }
+  h2 { font-size: 1.8rem !important; }
+  h3 { font-size: 1.2rem !important; }
+
+  /* Secciones con padding vertical reducido */
+  section { padding-top: 64px !important; padding-bottom: 64px !important; }
+
+  /* Grids de 2+ columnas → 1 columna */
+  [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns: 1fr 1fr"]  { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+
+  /* Contenedor con padding lateral cómodo */
+  [style*="maxWidth: 1240"] { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Botones full-width en hero */
+  [style*="display: \"flex\", gap: 16, flexWrap: \"wrap\""] { flex-direction: column !important; }
+
+  /* Scroll indicator oculto en móvil */
+  [style*="position: \"absolute\", bottom: 40"] { display: none !important; }
+}
