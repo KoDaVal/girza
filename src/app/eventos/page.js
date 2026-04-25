@@ -1,16 +1,39 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Reveal } from "../../components/Reveal";
 import { COLORS, fonts, s } from "../../utils/theme";
 import { icons } from "../../components/Icons";
+import { parseEventsCSV } from "../../utils/csvParser";
+
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSoo6BquDCWRxbbxE5_Ueom0PKMYq7npl2x_OkV8MF9fuYVYdyzbTFUfFYRuXbv2cCGGNNbGdmMSW6j/pub?output=csv";
 
 export default function Eventos() {
-  const eventos = [
+  const [eventos, setEventos] = useState([
     { date: "15 ABR", title: "Jornada de reciclaje electrónico",   location: "Parque Ecológico, Puebla",   type: "Público" },
     { date: "28 ABR", title: "Recolección empresarial Q2",          location: "Zona industrial, Puebla",    type: "Empresas" },
     { date: "10 MAY", title: "Dignificación Biblioteca Sta. María", location: "Santa María Xonacatepec",   type: "Comunidad" },
     { date: "22 MAY", title: "Feria del reciclaje infantil",        location: "Centro Cultural, Puebla",   type: "Público" },
-  ];
+  ]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const response = await fetch(CSV_URL);
+        const text = await response.text();
+        const parsedData = parseEventsCSV(text);
+        if (parsedData.length > 0) {
+          setEventos(parsedData);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchEvents();
+  }, []);
 
   return (
     <div className="page-inner" style={{ paddingTop: 120 }}>
@@ -57,11 +80,22 @@ export default function Eventos() {
                       color: ev.type === "Empresas" ? COLORS.teal[700] : ev.type === "Comunidad" ? COLORS.accent.main : COLORS.forest[700],
                       fontSize: 12, fontWeight: 600,
                     }}>{ev.type}</div>
-                    <button className="btn-fx" style={{ ...s.btn, ...s.btnPrimary, padding: "10px 20px", fontSize: 13 }}>Registrarse</button>
+                    <a 
+                      href={`https://wa.me/522228508632?text=${encodeURIComponent(`Hola, me gustaría registrarme al evento: ${ev.title}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-fx" 
+                      style={{ ...s.btn, ...s.btnPrimary, padding: "10px 20px", fontSize: 13, textDecoration: "none" }}
+                    >
+                      Registrarse
+                    </a>
                   </div>
                 </div>
               </Reveal>
             ))}
+            {!loading && eventos.length === 0 && (
+              <p style={{ textAlign: "center", color: COLORS.neutral[300] }}>No hay eventos próximos en este momento.</p>
+            )}
           </div>
         </div>
       </section>
@@ -101,3 +135,4 @@ export default function Eventos() {
     </div>
   );
 }
+
